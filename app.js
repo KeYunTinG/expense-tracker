@@ -4,6 +4,8 @@ const mongoose = require('mongoose') // 載入 mongoose
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser')
 
+const methodOverride = require('method-override')
+
 const Todo = require('./models/todo') // 載入 Todo model
 
 // 加入這段 code, 僅在非正式環境時, 使用 dotenv
@@ -32,6 +34,8 @@ app.set('view engine', 'hbs')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
+app.use(methodOverride('_method'))
+
 // 設定首頁路由
 app.get('/', (req, res) => {
   Todo.find() // 取出 Todo model 裡的所有資料
@@ -57,7 +61,7 @@ app.get('/todos/:id/edit', (req, res) => {
     .then((todo) => res.render('edit', { todo }))
     .catch(error => console.log(error))
 })
-app.post('/todos/:id/edit', (req, res) => {
+app.put('/todos/:id', (req, res) => {
   const id = req.params.id
   const { name, isDone } = req.body
   return Todo.findById(id)
@@ -70,7 +74,7 @@ app.post('/todos/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/todos/:id/delete', (req, res) => {
+app.delete('/todos/:id', (req, res) => {
   const id = req.params.id
   return Todo.findById(id)
     .then(todo => todo.remove())
