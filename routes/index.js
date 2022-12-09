@@ -4,10 +4,11 @@ const router = express.Router()
 const home = require('./modules/home')
 const todos = require('./modules/todos')
 const users = require('./modules/users')
+const { authenticator } = require('../middleware/auth')
 
 // 準備引入路由模組
 // 匯出路由器
-router.use('/', home)
 router.use('/todos', todos)
 router.use('/users', users)
+router.use('/', authenticator, home)
 module.exports = router
