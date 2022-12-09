@@ -1,5 +1,6 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
+const User = require('../models/user')
 module.exports = app => {
   // 初始化 Passport 模組
   app.use(passport.initialize())
@@ -19,18 +20,13 @@ module.exports = app => {
       .catch(err => done(err, false))
   }))
   // 設定序列化與反序列化
-  module.exports = app => {
-    // 初始化 Passport 模組 (skip)
-    // 設定本地登入策略 (skip)
-    // 設定序列化與反序列化
-    passport.serializeUser((user, done) => {
-      done(null, user.id)
-    })
-    passport.deserializeUser((id, done) => {
-      User.findById(id)
-        .lean()
-        .then(user => done(null, user))
-        .catch(err => done(err, null))
-    })
-  }
+  passport.serializeUser((user, done) => {
+    done(null, user.id)
+  })
+  passport.deserializeUser((id, done) => {
+    User.findById(id)
+      .lean()
+      .then(user => done(null, user))
+      .catch(err => done(err, null))
+  })
 }
