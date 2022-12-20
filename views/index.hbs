@@ -1,6 +1,19 @@
-<a href="/todos/new" class="btn btn-primary mb-3">Create</a>
+<select class="form-select" id="sort" name="sort">
+  <option>類別</option>
+  <option>家居物業</option>
+  <option>交通出行</option>
+  <option>休閒娛樂</option>
+  <option>餐飲食品</option>
+  <option>其他</option>
+</select>
+<br>
+<div class="row justify-content-center">
+  <div class="col-3">
+    <h1>總金額: {{totalAmount}}</h1>
+  </div>
+</div>
 <ul class="list-group">
-  {{#each todos}}
+  {{#each records}}
   <li class="list-group-item">
     <div class="row">
       <div class="col-auto me-auto">
@@ -11,9 +24,9 @@
         </h4>
       </div>
       <div class="col-auto">
-        <a class="btn btn-secondary" href="./todos/{{ this._id }}">detail</a>
-        <a class="btn btn-success" href="./todos/{{ this._id }}/edit">edit</a>
-        <form action="./todos/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+        <a class="btn btn-secondary" href="./records/{{ this._id }}">detail</a>
+        <a class="btn btn-success" href="./records/{{ this._id }}/edit">edit</a>
+        <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
           <button class="btn btn-danger" type="submit">delete</button>
         </form>
       </div>
@@ -21,3 +34,4 @@
   </li>
   {{/each}}
 </ul>
+<a href="/records/new" class="btn btn-primary mb-3">Create</a>

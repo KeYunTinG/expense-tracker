@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs')
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
-const Todo = require('../todo')
+const record = require('../record')
 const User = require('../user')
 const db = require('../../config/mongoose')
 const SEED_USER = {
@@ -23,7 +23,7 @@ db.once('open', () => {
       const userId = user._id
       return Promise.all(Array.from(
         { length: 10 },
-        (_, i) => Todo.create({ name: `name-${i}`, userId })
+        (_, i) => Record.create({ name: `name-${i}`, userId })
       ))
     })
     .then(() => {
