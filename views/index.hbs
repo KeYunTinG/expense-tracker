@@ -36,18 +36,12 @@
     </div>
     {{!-- 按鈕 --}}
     <div class="ms-5 d-flex ">
-      <a class="btn" href="/expenses/{{this._id}}/edit" role="button" style="background: #72a4d4; color:white">修改</a>
-      <form method="POST" action="/expenses/{{this._id}}/delete?_method=DELETE" class="mx-3"><button type="submit"
-          class="btn btn-secondary">刪除</button></form>
+      <a class="btn btn-success" href="./records/{{ this._id }}/edit">編輯</a>
+      <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;" class="mx-3">
+        <button class="btn btn-danger" type="submit">刪除</button>
+      </form>
     </div>
   </li>
-  <div class="col-auto">
-    <a class="btn btn-secondary" href="./records/{{ this._id }}">detail</a>
-    <a class="btn btn-success" href="./records/{{ this._id }}/edit">edit</a>
-    <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
-      <button class="btn btn-danger" type="submit">delete</button>
-    </form>
-  </div>
   {{/each}}
 </ul>
-<a href="/records/new" class="btn btn-primary mb-3">Create</a>
+<a href="/records/new" class="btn btn-primary mb-3">新增支出</a>
