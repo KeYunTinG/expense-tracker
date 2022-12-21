@@ -14,22 +14,40 @@
 </div>
 <ul class="list-group">
   {{#each records}}
-  <li class="list-group-item">
-    <div class="row">
-      <div class="col-auto me-auto">
-        <h4 style="display: inline; vertical-align: middle;">
-          {{ this.name }}
-        </h4>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
+    {{!-- 支出 --}}
+    <div class="d-flex justify-content-between align-items-center flex-grow-1 ms-3 me-5">
+      {{!-- 名稱 --}}
+      <div class="d-flex justify-content-start align-items-center">
+        <div>
+          <span style="color: #72a4d4">
+            <i class="fa-solid {{getIcon this.categoryId}}  fa-2xl"></i>
+          </span>
+        </div>
+        <div class="px-3 ">
+          <h5>{{this.name}}</h5>
+          <span class="fs-6 fw-lighter">{{dateTransform this.date}}</span>
+        </div>
       </div>
-      <div class="col-auto">
-        <a class="btn btn-secondary" href="./records/{{ this._id }}">detail</a>
-        <a class="btn btn-success" href="./records/{{ this._id }}/edit">edit</a>
-        <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
-          <button class="btn btn-danger" type="submit">delete</button>
-        </form>
+      {{!-- 金額 --}}
+      <div>
+        <span>{{this.amount}}</span>
       </div>
     </div>
+    {{!-- 按鈕 --}}
+    <div class="ms-5 d-flex ">
+      <a class="btn" href="/expenses/{{this._id}}/edit" role="button" style="background: #72a4d4; color:white">修改</a>
+      <form method="POST" action="/expenses/{{this._id}}/delete?_method=DELETE" class="mx-3"><button type="submit"
+          class="btn btn-secondary">刪除</button></form>
+    </div>
   </li>
+  <div class="col-auto">
+    <a class="btn btn-secondary" href="./records/{{ this._id }}">detail</a>
+    <a class="btn btn-success" href="./records/{{ this._id }}/edit">edit</a>
+    <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+      <button class="btn btn-danger" type="submit">delete</button>
+    </form>
+  </div>
   {{/each}}
 </ul>
 <a href="/records/new" class="btn btn-primary mb-3">Create</a>

@@ -15,7 +15,43 @@ require('./config/mongoose')
 const app = express()
 
 
-app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
+app.engine('hbs', exphbs({
+  defaultLayout: 'main', extname: '.hbs', helpers: {
+    //格式化時間
+    dateTransform(date) {
+      let Date = date.getDate()
+      let Month = date.getMonth() + 1
+      if (Date < 10) {
+        Date = '0' + Date
+      }
+      if (Month < 10) {
+        Month = '0' + Month
+      }
+      let formatted_date = date.getFullYear() + "-" + Month + "-" + Date
+      return formatted_date
+    },
+    //顯示類別的icon
+    getIcon(categoryId) {
+      switch (categoryId) {
+        case 1:
+          return 'fa-house'
+          break;
+        case 2:
+          return 'fa-van-shuttle'
+          break;
+        case 3:
+          return 'fa-face-grin-beam'
+          break;
+        case 4:
+          return 'fa-utensils'
+          break;
+        case 5:
+          return 'fa-pen'
+          break;
+      }
+    }
+  }
+}))
 app.set('view engine', 'hbs')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
