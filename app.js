@@ -17,7 +17,6 @@ const app = express()
 
 app.engine('hbs', exphbs({
   defaultLayout: 'main', extname: '.hbs', helpers: {
-    //格式化時間
     dateTransform(date) {
       let Date = date.getDate()
       let Month = date.getMonth() + 1
@@ -30,7 +29,6 @@ app.engine('hbs', exphbs({
       let formatted_date = date.getFullYear() + "-" + Month + "-" + Date
       return formatted_date
     },
-    //顯示類別的icon
     getIcon(categoryId) {
       switch (categoryId) {
         case 1:

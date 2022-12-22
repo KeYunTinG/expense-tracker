@@ -1,7 +1,6 @@
-// 引用 Express 與 Express 路由器
 const express = require('express')
 const router = express.Router()
-// 引用 record model
+
 const record = require('../../models/record')
 // 定義首頁路由
 router.get('/', (req, res) => {
@@ -12,5 +11,14 @@ router.get('/', (req, res) => {
         .then(records => res.render('index', { records }))
         .catch(error => console.error(error))
 })
-// 匯出路由模組
+router.get("/search", (req, res) => {
+    const categoryId = req.query.categoryId
+    const userId = req.user._id
+    record.find({ userId })
+    record.find({ categoryId })
+        .lean()
+        .sort({ _id: 'asc' }) // desc
+        .then(records => res.render('index', { records }))
+        .catch(error => console.error(error))
+})
 module.exports = router
