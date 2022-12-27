@@ -1,6 +1,6 @@
 <form action="/search" method="GET">
   <select type="submit" class=" form-select" id="categorySearch" name="categoryId" onchange="this.form.submit()">
-    <option value="">類別</option>
+    <option value="0">類別</option>
     <option value="1">家居物業</option>
     <option value="2">交通出行</option>
     <option value="3">休閒娛樂</option>
@@ -9,10 +9,8 @@
   </select>
 </form>
 <br>
-<div class="row justify-content-center">
-  <div class="col-3">
-    <h1>總金額: {{totalAmount}}</h1>
-  </div>
+<div class="text-center">
+  <h1>總金額: {{totalAmount}}</h1>
 </div>
 <ul class="list-group">
   {{#each records}}
@@ -50,3 +48,11 @@
 <div class="text-center">
   <a href="/records/new" class="btn btn-primary mb-3">新增支出</a>
 </div>
+<script>
+  let ID = {{ categoryId }}
+  for (i = 0; i < document.all("categorySearch").options.length; i++) {
+    if (document.all("categorySearch").options[i].value == ID
+    )
+      document.all("categorySearch").options[i].selected = true;
+  }
+</script>
