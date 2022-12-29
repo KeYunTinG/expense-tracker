@@ -16,13 +16,15 @@ router.post('/', (req, res) => {
 })
 
 router.get('/:id', (req, res) => {
-    const userId = req.user._id
-    const _id = req.params.id
-
-    return Record.findOne({ _id, userId })
+    const userId = req.user._id   // 變數設定
+    Record.find({ userId })
         .lean()
-        .then(record => res.render('detail', { record }))
-        .catch(error => console.log(error))
+        .sort({ _id: 'asc' }) // desc
+        .then(records => {
+            totalAmount = records.reduce((total, Record) => { return total + Record.amount }, 0)
+            res.render('index', { records, totalAmount })
+        })
+        .catch(error => console.error(error))
 })
 
 router.get('/:id/edit', (req, res) => {
@@ -31,7 +33,10 @@ router.get('/:id/edit', (req, res) => {
 
     return Record.findOne({ _id, userId })
         .lean()
-        .then(record => res.render('edit', { record }))
+        .then(record => {
+            const categoryId = record.categoryId
+            res.render('edit', { record, categoryId })
+        })
         .catch(error => console.log(error))
 })
 

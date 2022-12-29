@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const record = require('../../models/record')
+let totalAmount0 = 0
 // 定義首頁路由
 router.get('/', (req, res) => {
     const userId = req.user._id   // 變數設定
@@ -9,31 +10,33 @@ router.get('/', (req, res) => {
         .lean()
         .sort({ _id: 'asc' }) // desc
         .then(records => {
-            let totalAmount = records.reduce((total, record) => { return total + record.amount }, 0)
+            totalAmount = records.reduce((total, record) => { return total + record.amount }, 0)
             res.render('index', { records, totalAmount })
         })
         .catch(error => console.error(error))
 })
+
 router.get("/search", (req, res) => {
     const categoryId = req.query.categoryId
     const userId = req.user._id
-    console.log(categoryId)
+    let totalAmount = 0
     if (categoryId > 0) {
         record.find({ userId, categoryId })
             .lean()
             .sort({ _id: 'asc' }) // desc
             .then(records => {
-                let totalAmount = records.reduce((total, record) => { return total + record.amount }, 0)
+                records.forEach((record) => {
+                    totalAmount += record.amount
+                })
                 res.render('index', { records, categoryId, totalAmount })
             })
-            .catch(error => console.error(error))
+            .catch(errors => console.error(error))
     } else {
-        console.log(1)
         record.find({ userId })
             .lean()
             .sort({ _id: 'asc' }) // desc
             .then(records => {
-                let totalAmount = records.reduce((total, record) => { return total + record.amount }, 0)
+                totalAmount = records.reduce((total, record) => { return total + record.amount }, 0)
                 res.render('index', { records, totalAmount })
             })
             .catch(error => console.error(error))
