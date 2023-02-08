@@ -9,4 +9,4 @@ node_modules
 *.gz
 
 # dotenv
-.env
+#.env
