@@ -6,7 +6,7 @@ const methodOverride = require('method-override')
 const session = require('express-session')
 const usePassport = require('./config/passport')
 const flash = require('connect-flash')
-const port = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -71,6 +71,6 @@ app.use((req, res, next) => {
 })
 app.use(routes)
 // 設定 port 3000
-app.listen(port, () => {
-  console.log(`App is running on http://localhost:${process.env.PORT}`)
+app.listen(PORT, () => {
+  console.log(console.log(`App is running on http://localhost:${PORT}`))
 })
