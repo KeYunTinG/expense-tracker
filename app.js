@@ -10,11 +10,11 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
-const PORT = process.env.PORT || 3000
 const routes = require('./routes')
 require('./config/mongoose')
 const app = express()
 
+const PORT = process.env.PORT || 3000
 
 app.engine('hbs', exphbs({
   defaultLayout: 'main', extname: '.hbs', helpers: {
