@@ -71,6 +71,6 @@ app.use((req, res, next) => {
 })
 app.use(routes)
 // 設定 port 3000
-app.listen(process.env.PORT, () => {
+app.listen(port, () => {
   console.log(`App is running on http://localhost:${process.env.PORT}`)
 })
