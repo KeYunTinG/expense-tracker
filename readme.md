@@ -36,7 +36,7 @@ https://github.com/robert1074004/expense-tracker
 
 3.在本地開啟之後，透過終端機進入資料夾
 ```
-cd ShortenUrl
+cd expense-tracker
 ```
 
 4.安裝npm 套件
