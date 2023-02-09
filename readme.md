@@ -27,27 +27,40 @@ MongoDB
 
 ## 執行專案
 
-1.打開你的 terminal，Clone 此專案至本機電腦
+1.請先安裝 node.js 與 npm
 
-git clone https://github.com/robert1074004/expense-tracker
+2.將專案 clone 到本地
 ```
-2.開啟終端機(Terminal)，進入存放此專案的資料夾
-
-cd expense-tracker
+https://github.com/robert1074004/expense-tracker
 ```
-3.安裝 nodemon
 
-npm install -g nodemon
+3.在本地開啟之後，透過終端機進入資料夾
 ```
-4.npm install所需要的套件
-
-npm install  
+cd ShortenUrl
 ```
-5.啟動專案
 
+4.安裝npm 套件
+
+```
+npm install 
+```
+
+5.安裝完畢後，輸入：
+
+```
 npm run dev
 ```
-6.複製顯示在終端機的網址，前往網頁
 
+6.若能看見以下訊息代表運行成功，可用瀏覽器進入到以下網址:
+
+```
+Express is listening on localhost:3000
+```
+
+7.結束運行請輸入:
+
+```
+ctrl + c
+```
 ## 環境建置
 Node.js Robo3T
